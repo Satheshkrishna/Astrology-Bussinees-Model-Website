@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrowix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: white;
+            padding: 10px 20px;
+            border-bottom: 3px solid purple;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+        .nav-link {
+            color: black;
+        }
+        .full-screen-section {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
+        .text-section {
+            background-color: aquamarine;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+        .text-section h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .about {
+            width: 100%;
+            min-height: 500px;
+            background-color: #EAEAE8;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .stars-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+  }
+  
+  .star {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 2s infinite ease-in-out;
+  }
+
+  @keyframes twinkle {
+      0% { opacity: 0; transform: scale(0.6) translateY(0px); }
+      50% { opacity: 1; transform: scale(2) translateY(-10px); }
+      100% { opacity: 0; transform: scale(0.6) translateY(-20px); }
+  }
+
+  .star:nth-child(1) { top: 10%; left: 20%; animation-delay: 0.5s; }
+  .star:nth-child(2) { top: 30%; left: 50%; animation-delay: 1s; }
+  .star:nth-child(3) { top: 60%; left: 70%; animation-delay: 1.5s; }
+  .star:nth-child(4) { top: 80%; left: 30%; animation-delay: 2s; }
+  .star:nth-child(5) { top: 50%; left: 90%; animation-delay: 2.5s; }
+
+        .about img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .three-column-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .three-column-section .col-md-4 {
+            min-height: 400px;
+            padding: 20px;
+        }
+        .bg-custom {
+        background: linear-gradient(135deg, #F1C40F, #D35400);
+    }
+
+    .custom-navbar {
+        background: linear-gradient(135deg, #F1C40F, #D35400);
+        padding: 12px 0;
+    }
+
+    /* NAVIGATION STYLING */
+    .nav-link {
+        color: white !important;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        padding: 8px 12px;
+    }
+
+    .nav-link:hover {
+        color: #F1C40F !important;
+    }
+
+    /* BUTTON GRADIENT */
+    .btn-gradient {
+        background: linear-gradient(45deg, #E67E22, #D35400);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-gradient:hover {
+        background: linear-gradient(45deg, #D35400, #E67E22);
+        transform: scale(1.05);
+    }
+
+    /* RESPONSIVE NAVBAR ICON */
+    .navbar-toggler {
+        background: white;
+        border-radius: 4px;
+        padding: 5px;
+    }
+    .moon {
+        position: absolute;
+        top: 20px;
+        right: 50px;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, #ffffff, #cccccc);
+        border-radius: 50%;
+        box-shadow: 0px 0px 15px 8px rgba(255, 255, 200, 0.7);
+        animation: floatMoon 5s infinite alternate ease-in-out, glow 3s infinite alternate;
+    }
+
+    @keyframes floatMoon {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(20px); }
+    }
+
+    @keyframes glow {
+        0% { box-shadow: 0px 0px 15px 8px rgba(255, 255, 200, 0.5); }
+        100% { box-shadow: 0px 0px 20px 10px rgba(255, 255, 200, 1); }
+    }
+    .navbar-toggler-icon {
+    background-image: url('path-to-your-custom-icon.svg');
+}
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar shadow">
+        <div class="container">
+            <!-- LOGO -->
+            <a class="navbar-brand text-white fw-bold" href="#">
+                <img src="astrology.jpeg" alt="Logo" width="40" class="me-2"> Astrowix
+            </a>
+    
+            <!-- TOGGLER BUTTON -->
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- NAVIGATION LINKS -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link nav-hover" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link nav-hover" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link nav-hover" href="#service">Services</a></li>
+                    <li class="nav-item"><a class="nav-link nav-hover" href="#form">Info</a></li>
+                </ul>
+    
+                <!-- CTA BUTTON -->
+                <button class="btn btn-gradient ms-4 fw-bold px-4" data-bs-toggle="modal" data-bs-target="#bookingModal">
+                    Book Now
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+
+
+    
+    
+    
+
+    <!-- pop up page section -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Book an Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: rgb(255, 255, 255); background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6vQHJLvbL_HqcdqwHWJBqiBJEMlBm7cxy8yJ3QYfB2HcVE5YMPbLpS-i1lXFCR_ze-1i3iEW3xFPOm0I9sMDxMuaL5JCwVwZ_0PRZ-5a3Hw4v9fY_j1QHzHwfQaILysvtNeBYtqRG5ix_vWLpwW5mHAiRveXG2LvUeNEIA9Uju_Y77kkv79o61SDppMw/s320/service2.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;" >
+                <h3>Select a service and book your appointment.</h3><br>
+                <div id="services">
+                    <div class="service d-flex justify-content-between align-items-center">
+                        <p class="mb-0 flex-grow-1">Personalized Horoscope reading</p>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScAVxoandKvi8Ks4uV0zZ2WJgbx_D7LV3yOd-j2nTh08UAsOQ/viewform?usp=dialog" style="text-decoration: none;"><button >Enroll now</button></a>
+                    </div><br>
+                    <div class="service d-flex justify-content-between align-items-center">
+                        <p class="mb-0 flex-grow-1">Character analysis</p>
+                        <a target="" href="https://forms.gle/VPR1fjPKiC5i3vgX7"><button>Enroll now</button></a>
+                    </div><br>
+                    <div class="service d-flex justify-content-between align-items-center">
+                        <p class="mb-0 flex-grow-1">Future Prediction</p>
+                        <a href="https://forms.gle/WAnTyNGLHi9qdhAe6"><button>Enroll now</button></a>
+                    </div><br>
+                    <div class="service d-flex justify-content-between align-items-center">
+                        <p class="mb-0 flex-grow-1">Life Coaching</p>
+                        <a href="https://forms.gle/NS8Ro4zuU7hxmPqB9"><button>Enroll now</button></a>
+                    </div><br>
+                    <div class="service d-flex justify-content-between align-items-center">
+                        <p class="mb-0 flex-grow-1">Astrological Remedies</p>
+                        <a href="https://forms.gle/C5YDT5vj4chV85iF9"><button>Enroll now</button></a>
+                    </div><br>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    
+    
+
+    <!-- Home Page Section -->
+    <section class="container-fluid vh-100 d-flex p-0" style="margin-top: 30px;border-radius: 100px;" id="home" >
+        <div class="row w-100 m-0">
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center p-5 position-relative overflow-hidden" style="background-color: #000000;">
+                <h1 class="fw-bold" style="font-size: 50px;color: wheat;">Find your character with Astrowix</h1>
+                <a class="btn btn-success" href="#service">Book an Service</a>
+                <div class="stars-container">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+            </div>
+            <div class="col-md-6 p-0">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPczdxj9IKzF4gUGtjrxqbRYPSIrKs44yM21Z6SImUqJFOR6SJ5aW9NvavRk4iuJGCIUT0rG0s9R7l1bYMDrIIW0QPf2WKEenorrHRSaERzATP6HSSmoBk80fW4rWwZk7uYlQJ_eX9CPrf7S7dE7jOHGAS841PJjb4mxlKeM9ndeEV02yIBBPzxyWLngo/s320/home-page.webp" 
+                     alt="Placeholder Image" class="img-fluid w-100 h-100 object-fit-cover">
+            </div>
+        </div>
+    </section>
+    
+    
+    
+
+    <!-- About Section -->
+    <section class="about text-center py-5 position-relative" id="about"> 
+        <div class="container">
+            <h3  style="font-size: 49px;font-weight: bold;">About Astrowix</h3>
+            <p class="mt-4 text-muted" style="font-size: 20px;padding: 50px;">
+                Astrowix is your trusted platform for astrology consultation services. Our astrologer provides personalized insights 
+                to help you navigate life's challenges and make informed decisions. We are dedicated to empowering individuals with 
+                the ancient wisdom of astrology.
+            </p>
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQlwlfpj9ga4l0v3lQWlzf0AUN4RpT8bEEIzN8Yc3Y3s2FKmW8y1VKvfqC9YBqzZxmQEQDV6jBCVM60B8Jog4o3WcAf69Ydoka9pi4ykpXqj5L633CVYEaxozKzS33k7PYYmo5mG_DKybMwmtx1w6dtTIjnEdk5j4RXlkexcBnI1nz9dRsng64s2oXTvM/s1600/astrology.jpeg" alt="Astrology Image" class="img-fluid mt-3 rounded shadow" width="400px" height="500px"/>
+    
+            <!-- Moon Container -->
+            <div id="moon-container"></div>
+        </div>
+    </section>
+    
+
+    <!-- Three Column Section -->
+    <section class="container mt-5">
+        <div class="row three-column-section">
+            <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center text-center p-4 bg-success-subtle" style="border-radius: 40px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1Uxv5XGzAlVNcDuUlCbZUl9AhfmHwHz8RLbjfcd5-JlXW1lFG7Vv5WUJGjACsRenPVijugPWzX5l-h5oc-ClfKL6Aa38T6kr8cXdIeoLubU5f7rdUvT_pZr5dRXdLxxyNK9Bp7-ECYIOS2GHAuhLbXMu-ngo7I1nM2ifGZgIulL0OuBta_QWYjj6X69g/s320/zodiac.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                <div class="text-light" >
+                    <h5>01.</h5>
+                    <h3>Personalized Consultations</h3>
+                    <p>Experience personalized astrology consultations tailored to your needs.</p>
+                </div>  
+            </div>
+            <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center text-center p-4 bg-light" 
+            <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center text-center p-4 bg-success-subtle" style="border-radius: 40px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3-0CEBtPCJ1WT704XBYiRBzjhtCY09nip6AUj7pee28u2TkImQTAy0mTCyQTp5_ZdPDW_7NmPWO5HZpIWH3AtOTWSz5x5tO9CbdPGnllnipQi5hcp_XhIvwW_rqIQ6-DhaQnGzkyEPeM-JZF7v_qQNl1qtjutVj8xKY237I-0cdJDxrrsL8IlYALDaw0/s320/star.jpg.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;"> 
+                <div class="text-light">
+                    <h5>02.</h5>
+                    <h3>Online Workshops</h3>
+                    <p>Join our online astrology workshops to gain valuable insights.</p>
+                    <a class="btn btn-success" href="#service">Explore More Services →</a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center text-center p-4 bg-info-subtle" 
+            <div class="col-md-4 col-sm-12 d-flex align-items-center justify-content-center text-center p-4 bg-success-subtle" style="border-radius: 40px; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRGSUhzZ9sWrsUGq-zuZaFx3ucnJSkxFgOCT64DQ-xPn2fvqlX6cg4NPyrMzq5dv7hIcJKgGrIayKQQ4QXmNo-ODOAUpPLCvCfrJMFg4qXaj-U7iflsfZjtfw3P5-f-wtrzz-wNf2zTm0T6zMzgJESFRlERBnoxRC567pL2w-0OxdLFQ2yUdHSw3JII9Q/s320/backastro.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                <div>
+                    <h5>03.</h5>
+                    <h3>Relationship Readings</h3>
+                    <p>Unlock the secrets of your relationships with our readings.</p>
+                </div>
+            </div>
+        </div>
+
+        </section>
+    <!-- servive page section -->
+        <section class="py-5 text-center" id="service"> 
+            <h5 class="text-muted">Astrology Consultation Services</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 py-5 text-center" style="border-radius: 20px; color: white; background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZinUttfH_D8dqPgTXr0O7KsGAiJnEFQorpnof4ZeEjV59KkyxIZMAqnast0JYP1FJ0neqa8efJZfdz7cBcuS-Tye0MUxdlvevnqObKYWGqJKNHR2VLIJ3M-997JLLoD0SwRStdctoRxY33xS0YLXgc8VV3OjPNnE10r7qYxQQGOkLjPa3A_7JiitlEC8/s320/service1.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                        <h6 class="text-muted">01.</h6>
+                        <h1 class="mx-auto" style="max-width: 600px;">Personalized Horoscope Readings</h1>
+                        <p class="mx-auto" style="max-width: 800px;">Astrowix offers personalized horoscope readings to provide insights into individuals' life events, personality, and future. Our expert astrologers provide in-depth analysis and guidance based on planetary positions and celestial influences.</p>
+                    </div>
+                    <div class="col-12 py-5 text-center mt-3" style="border-radius: 20px;color: white;background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3-0CEBtPCJ1WT704XBYiRBzjhtCY09nip6AUj7pee28u2TkImQTAy0mTCyQTp5_ZdPDW_7NmPWO5HZpIWH3AtOTWSz5x5tO9CbdPGnllnipQi5hcp_XhIvwW_rqIQ6-DhaQnGzkyEPeM-JZF7v_qQNl1qtjutVj8xKY237I-0cdJDxrrsL8IlYALDaw0/s320/star.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                        <h6 class="text-muted">02.</h6>
+                        <h1 class="mx-auto" style="max-width: 600px;">Character Analysis</h1>
+                        <p class="mx-auto" style="max-width: 800px;">Character analysis in astrology is the process of examining birth chart (natal chart) to understand their personality, traits, strengths, weaknesses, and behavioral patterns. It involves in analyzing core identity, ego, and life purpose. It Reflects emotions, subconscious mind, inner feelings and outward personality</p>
+                    </div>
+                    <div class="col-12 py-5 text-center  mt-3" style="border-radius: 20px;color: white;background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAi4nOfU6XP39RAJKrWsGMH_AL7vFhRk1WA9zGB_N6vn_NPf-ojwPlufbPr5WSf8UwZu0r5BB0rt6iF2FAHSkHSAL4WEDNgcR7w3SqEgHGhdnFWptx3pVBPqSaH5XNC5Zm20vXaD41voWGa3jH7qsxe7gs5Qq9B9QEtimEgiEGetnOv4SKDG9aLuv0LEs/s320/service3.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                        <h6 class="text-muted">03.</h6>
+                        <h1 class="mx-auto" style="max-width: 600px;">Future Prediction</h1>
+                        <p class="mx-auto" style="max-width: 800px;">Seeking career clarity? Our astrology consultation service provides valuable insights into career choices, professional growth, and opportunities. Leverage astrological guidance to make informed decisions and pursue a fulfilling career path.</p>
+                    </div>
+                
+                    <div class="col-12 py-5 text-center  mt-3" style="border-radius: 20px;color: white;background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjemIq6EmcIbAD99OSYa7LZYeSGduXQuwt2kiepjiNPB9oFC-zXB5R6wz7YRn4LCth302BtwA5GaXpnFLwqQ-SBpHv_GNjwswqditofTCsGj-WMbHe1GfTIZzSzZsPerbQ_I_HxihHFZEAui5Z11ZFAipmXbAS8pgrjs1_c-WDTRUlGbhu65oChwpfOtyI/s320/service5.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                        <h6 class="text-muted">05.</h6>
+                        <h1 class="mx-auto" style="max-width: 600px;">Life Coaching</h1>
+                        <p class="mx-auto" style="max-width: 800px;">Empower yourself with personalized astrology-based life coaching. Discover your strengths, overcome challenges, and set meaningful goals with the guidance of our experienced astrologers. Transform your life positively with our tailored coaching sessions.</p>
+                    </div>
+                    <div class="col-12 py-5 text-center  mt-3" style="border-radius: 20px;color: white;background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuZqeW-5pMOdgl4sadcYjUBBxEYT1ESlnaKemRlkzs9EL9dYcE_FJK_RQem4PNyJ781uXM4dPu9u-PlgIwmlyG1ZHENjEkDv1qsoNt6dA1RXxOSDYHfiXIewJ489_wT8slIREBw5OQZHPJWCOYQywfLlaESd2W266YD3ozLWEldiCCsDENBVXDlo_nlkI/s320/service6.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
+                        <h6 class="text-muted">06.</h6>
+                        <h1 class="mx-auto" style="max-width: 600px;">Astrological Remedies</h1>
+                        <p class="mx-auto" style="max-width: 800px;">Experience the power of astrological remedies to mitigate planetary influences and enhance well-being. Our astrology experts recommend personalized remedies including gemstones, rituals, and spiritual practices to bring balance and harmony into your life.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+       
+        
+            
+        </div>
+    </section>
+    
+    <!-- form page section -->
+   <!-- <section class="py-5 text-white" style=" background-image: url('form.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;" id="form">
+    <div class="container text-center">
+        <h1 class="fw-bold">Welcome to Astrowix</h1>
+        <p class="mx-auto" style="max-width: 700px;">
+            Astrowix is the go-to destination for astrology consultations and guidance. Our experienced astrologers provide personalized insights and advice to help you navigate life's challenges. We are passionate about helping individuals find clarity.
+        </p>
+        
+        <form class="mt-4 mx-auto p-4 rounded shadow" style="max-width: 500px; background: rgba(0, 0, 0, 0.6);">
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label">First Name *</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label">Last Name *</label>
+                    <input type="text" class="form-control" required>
+                </div>
+            </div>
+            <div class="mt-3">
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-control" required>
+            </div>
+            <div class="mt-3">
+                <label class="form-label">Subject</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="mt-3">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn w-100 mt-3 text-white" style="background-color: #90d4c0;">Send</button>
+        </form>
+    </div>
+</section> -->
+
+
+</section style="background-color: #d5f5e3;">
+<section class="container py-5 text-center" id="form" >
+    <h5 class="fst-italic">Info </h5>
+    <h1 class="fw-bold">Our Journey</h1>
+    <p class="lead" >
+        Astrowix has been dedicated to providing exceptional astrological guidance and support to our clients. 
+        Our journey is built on the philosophy of empowering individuals with the knowledge to chart their course in life, 
+        overcome obstacles, and embrace opportunities.
+    </p>
+</section>
+
+<section class="container py-5">
+    <h5 class="fst-italic text-center">Qualifications</h5>
+    <div class="row text-center">
+        <div class="col-md-6">
+            <p><strong>Name </strong><br>Keerthana Ravichandran</p>
+            <p><strong>Specialization -</strong><br>Astrological Studies</p>
+            <p><strong>Training -</strong><br>Vedic Astrology</p>
+            <p><strong>Workshop -</strong><br>Astrology and Personal Development</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Advanced Studies -</strong><br>Astrology and Human Psychology</p>
+            <p><strong>On Going</strong> -</strong><br>Astrological Research</p>
+            <p><strong></strong> -</strong><br>100% Prediction and Verification</p>
+        </div>
+    </div>
+</section>
+<!-- Bootstrap CSS & JS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+
+    <!-- Footer -->
+    <footer class="mt-2 text-center p-3 bg-dark text-white">
+        <a href="https://aimfort.blogspot.com/" style="text-decoration: none;color: white;">Template Created By AimFort @2025 </a>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let services = document.querySelectorAll(".service");
+        
+            services.forEach(service => {
+                let decreaseBtn = service.querySelector(".decrease");
+                let increaseBtn = service.querySelector(".increase");
+                let countSpan = service.querySelector(".count");
+                let price = 200; // Fixed price per service
+        
+                decreaseBtn.addEventListener("click", function () {
+                    let count = parseInt(countSpan.textContent);
+                    if (count > 0) {
+                        countSpan.textContent = count - 1;
+                        updateTotal();
+                    }
+                });
+        
+                increaseBtn.addEventListener("click", function () {
+                    let count = parseInt(countSpan.textContent);
+                    countSpan.textContent = count + 1;
+                    updateTotal();
+                });
+            });
+        
+            function updateTotal() {
+                let total = 0;
+                document.querySelectorAll(".count").forEach(countSpan => {
+                    total += parseInt(countSpan.textContent) * 200;
+                });
+                document.getElementById("totalPrice").textContent = total;
+            }
+        });
+        function showMoonAtNight() {
+        let hour = new Date().getHours();
+        if (hour >= 18 || hour <= 6) {
+            let moon = document.createElement("div");
+            moon.classList.add("moon");
+            document.getElementById("moon-container").appendChild(moon);
+        }
+    }
+    showMoonAtNight();  
+    document.addEventListener("DOMContentLoaded", function () {
+        let navLinks = document.querySelectorAll(".nav-link");
+        let navbarCollapse = document.querySelector(".navbar-collapse");
+        
+        navLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                if (navbarCollapse.classList.contains("show")) {
+                    new bootstrap.Collapse(navbarCollapse, { toggle: true });
+                }
+            });
+        });
+    });
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
